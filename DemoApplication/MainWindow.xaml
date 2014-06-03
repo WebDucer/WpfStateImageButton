@@ -1,0 +1,29 @@
+﻿<Window x:Class="de.webducer.csharp.DemoApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wc="clr-namespace:de.webducer.csharp.WpfControls.ImageButton;assembly=WpfControls"
+        xmlns:local="clr-namespace:de.webducer.csharp.DemoApplication"
+        Title="MainWindow" Height="514" Width="714"
+        Background="Aqua">
+    <Window.Resources>
+        <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="ImageSize">128</sys:Double>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <WrapPanel>
+        <wc:ImageButton Width="75" Height="{StaticResource ImageSize}" Margin="2" DefaultImage="Images/default.png" />
+        <wc:ImageButton Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" Margin="2" DefaultImage="Images/default.png" FocusedImage="Images/active.png" />
+        <wc:ImageButton x:Name="Dependent" Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" IsEnabled="False" Margin="2" DefaultImage="Images/default.png" DisabledImage="Images/disabled.png" />
+        <CheckBox IsChecked="{Binding ElementName=Dependent, Path=IsEnabled}" Content="Active" Margin="10" VerticalAlignment="Center" />
+        <wc:ImageButton x:Name="Dependent2" Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" IsEnabled="False" Margin="2" DefaultImage="Images/default.png" />
+        <CheckBox IsChecked="{Binding ElementName=Dependent2, Path=IsEnabled}" Content="Active" Margin="10" VerticalAlignment="Center" />
+        <ContentControl Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" Content="{Binding AllStates}" x:Name="Dependent3" />
+        <CheckBox IsChecked="{Binding ElementName=Dependent3, Path=IsEnabled}" Content="Active" Margin="10" VerticalAlignment="Center" />
+        <ContentControl Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" Content="{Binding NoDisabled}" x:Name="Dependent4" />
+        <CheckBox IsChecked="{Binding ElementName=Dependent4, Path=IsEnabled}" Content="Active" Margin="10" VerticalAlignment="Center" />
+        <ContentControl Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" Content="{Binding NoFocused}" x:Name="Dependent5" />
+        <CheckBox IsChecked="{Binding ElementName=Dependent5, Path=IsEnabled}" Content="Active" Margin="10" VerticalAlignment="Center" />
+        <Image Source="Images/default.png" Width="{StaticResource ImageSize}" Height="{StaticResource ImageSize}" Opacity="0.5" />
+    </WrapPanel>
+</Window>
